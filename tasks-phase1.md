@@ -91,7 +91,7 @@ usage:
     monthly_data_processed_gb: 300
 ```
 
-   ***place the screenshot from infracost output here***
+![img.png](doc/figures/infracost.png)
 
 1.  Create a BigQuery dataset and an external table using SQL
 

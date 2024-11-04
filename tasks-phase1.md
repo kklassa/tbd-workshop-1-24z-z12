@@ -183,7 +183,31 @@ usage:
 
     2. Add support for preemptible/spot instances in a Dataproc cluster
 
-    ***place the link to the modified file and inserted terraform code***
+    Added a variable `preeemptible_worker_count` to the `dataproc` module to support arbitrary number of preemptible worker nodes in a Dataproc cluster. Added a `preemptible_worker_config` block to the `google_dataproc_cluster` resource to configure preemptible worker nodes.
+
+    ['modules/dataproc/variables.tf'](modules/dataproc/variables.tf)
+
+    ```
+    variable "preeemptible_worker_count" {
+      type        = number
+      default     = 0
+      description = "Number of preemptible worker nodes"
+    }
+    ```
+
+    ['modules/dataproc/main.tf'](modules/dataproc/main.tf)
+
+    ```
+    preemptible_worker_config {
+      num_instances = var.preeemptible_worker_count
+
+      disk_config {
+        boot_disk_type    = "pd-standard"
+        boot_disk_size_gb = 100
+      }
+
+      preemptibility = "SPOT"
+    }
 
     3. Perform additional hardening of Jupyterlab environment, i.e. disable sudo access and enable secure boot
 

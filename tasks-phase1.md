@@ -112,7 +112,8 @@ usage:
 
 12. Start an interactive session from Vertex AI workbench:
 
-    ***place the screenshot of notebook here***
+    ![image](https://github.com/user-attachments/assets/aa288a12-2dcb-49fb-bfd8-55c7740d40b6)
+
 
 13. Find and correct the error in spark-job.py
 

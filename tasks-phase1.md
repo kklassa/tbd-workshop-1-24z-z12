@@ -127,7 +127,7 @@ usage:
     ![image](https://github.com/user-attachments/assets/eb7b1302-0b5a-4b73-a2a0-14062e00fa16)
 
 
-15. Additional tasks using Terraform:
+14. Additional tasks using Terraform:
 
     1. Add support for arbitrary machine types and worker nodes for a Dataproc cluster and JupyterLab instance
 
@@ -208,10 +208,28 @@ usage:
 
       preemptibility = "SPOT"
     }
+    ```
 
     3. Perform additional hardening of Jupyterlab environment, i.e. disable sudo access and enable secure boot
 
-    ***place the link to the modified file and inserted terraform code***
+    Disabled sudo access for the JupyterLab instance by setting the value of the `notebook-disable-root` metadata key to `true` (as documented [here](https://cloud.google.com/vertex-ai/docs/workbench/instances/manage-metadata)). Additionally enabled secure boot, integrity monitoring and vTPM by configuring the `shielded_instance_config` block.  
+
+    ['modules/vertex-ai-workbench/main.tf'](modules/vertex-ai-workbench/main.tf)
+
+    ```
+    metadata = {
+      vmDnsSetting : "GlobalDefault"
+      notebook-disable-root: true
+    }
+    ```
+
+    ```
+    shielded_instance_config {
+      enable_secure_boot          = true
+      enable_vtpm                 = true
+      enable_integrity_monitoring = true
+    }
+    ```
 
     4. (Optional) Get access to Apache Spark WebUI
 

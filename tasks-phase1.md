@@ -123,6 +123,10 @@ usage:
     Beside that I need to define GOOGLE_APPLICATION_CREDENTIALS to point to my gcloud credentials export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json.
     Also I set my role as Storage Object Admin - to make sure I can write to Goofle Cloud Storage.
 
+    After loading the results into BigQuery as external table, the results are:
+    ![image](https://github.com/user-attachments/assets/eb7b1302-0b5a-4b73-a2a0-14062e00fa16)
+
+
 15. Additional tasks using Terraform:
 
     1. Add support for arbitrary machine types and worker nodes for a Dataproc cluster and JupyterLab instance

@@ -93,7 +93,7 @@ usage:
 
 ![img.png](doc/figures/infracost.png)
 
-1.  Create a BigQuery dataset and an external table using SQL
+11.  Create a BigQuery dataset and an external table using SQL
 
     ``` sql
     CREATE SCHEMA IF NOT EXISTS task1;

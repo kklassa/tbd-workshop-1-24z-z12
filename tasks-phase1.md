@@ -95,7 +95,6 @@ usage:
 
 1.  Create a BigQuery dataset and an external table using SQL
 
-    ***place the code and output here***
     ``` sql
     CREATE SCHEMA IF NOT EXISTS task1;
 
@@ -107,8 +106,7 @@ usage:
     ```
     ![image](https://github.com/user-attachments/assets/5ed43a3c-eb4e-4317-8a95-3b33453e597e)
 
-    ***why does ORC not require a table schema?***
-
+    ORC (Optimized Row Columnar) does not require a table schema because the schema information is embedded within the file, allowing tools to read structure of the data without needing a predefined schema.
 
 12. Start an interactive session from Vertex AI workbench:
 
@@ -117,9 +115,15 @@ usage:
 
 13. Find and correct the error in spark-job.py
 
-    ***describe the cause and how to find the error***
+    I had problems connecting spark to Google Cloud services. Most of this problems were solved by defining a SparkSession.
+    I needed to download and include jars for connecting to hadoop adn BigQuery: .config('spark.jars', 'spark_jars/spark-bigquery-with-dependencies_2.12-0.29.0.jar,spark_jars/gcs-connector-hadoop2-latest.jar')
+    Provide project information: .config("parentProject", "tbd-2024z-310742").config("spark.bigquery.project", "tbd-2024z-310742")
+    COnfigure filesystem information:  .config("fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem").config("fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS")
 
-14. Additional tasks using Terraform:
+    Beside that I need to define GOOGLE_APPLICATION_CREDENTIALS to point to my gcloud credentials export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json.
+    Also I set my role as Storage Object Admin - to make sure I can write to Goofle Cloud Storage.
+
+15. Additional tasks using Terraform:
 
     1. Add support for arbitrary machine types and worker nodes for a Dataproc cluster and JupyterLab instance
 

@@ -64,7 +64,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     3. List of buckets for disposal
     4. Description of network communication (ports, why it is necessary to specify the host for the driver) of Apache Spark running from Vertex AI Workbech
 
-    ***place your diagram here***
+  ![img.png](doc/figures/diagram.png)
 
 10. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
@@ -212,7 +212,7 @@ usage:
 
     3. Perform additional hardening of Jupyterlab environment, i.e. disable sudo access and enable secure boot
 
-    Disabled sudo access for the JupyterLab instance by setting the value of the `notebook-disable-root` metadata key to `true` (as documented [here](https://cloud.google.com/vertex-ai/docs/workbench/instances/manage-metadata)). Additionally enabled secure boot, integrity monitoring and vTPM by configuring the `shielded_instance_config` block.  
+    Disabled sudo access for the JupyterLab instance by setting the value of the `notebook-disable-root` metadata key to `true` (as documented [here](https://cloud.google.com/vertex-ai/docs/workbench/instances/manage-metadata)). Additionally enabled secure boot, integrity monitoring and vTPM by configuring the `shielded_instance_config` block.
 
     ['modules/vertex-ai-workbench/main.tf'](modules/vertex-ai-workbench/main.tf)
 
@@ -232,7 +232,7 @@ usage:
     ```
 
     Below is a screenshot of the JupyterLab notebook configuration after applying the changes:
-    
+
     ![image](doc/figures/secured-notebook.png)
 
     4. (Optional) Get access to Apache Spark WebUI

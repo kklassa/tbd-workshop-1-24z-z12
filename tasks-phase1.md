@@ -231,6 +231,10 @@ usage:
     }
     ```
 
+    Below is a screenshot of the JupyterLab notebook configuration after applying the changes:
+    
+    ![image](doc/figures/secured-notebook.png)
+
     4. (Optional) Get access to Apache Spark WebUI
 
     ***place the link to the modified file and inserted terraform code***

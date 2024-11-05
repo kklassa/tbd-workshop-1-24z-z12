@@ -17,8 +17,18 @@ from __future__ import print_function
 import tempfile
 from pyspark.sql import SparkSession
 
+
+spark = SparkSession.builder \
+    .appName('Shakespeare WordCount') \
+    .config('spark.jars', 'spark_jars/spark-bigquery-with-dependencies_2.12-0.29.0.jar,spark_jars/gcs-connector-hadoop2-latest.jar') \
+    .config("parentProject", "tbd-2024z-310742") \
+    .config("spark.bigquery.project", "tbd-2024z-310742") \
+    .config("fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem") \
+    .config("fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS") \
+    .getOrCreate()
+
 # change to your data bucket
-DATA_BUCKET = "gs://bucket-tbd-z12/data/shakespeare/"
+DATA_BUCKET = "gs://tbd-2024z-310742-data/data/shakespeare/"
 
 spark = SparkSession.builder.appName('Shakespeare WordCount').getOrCreate()
 

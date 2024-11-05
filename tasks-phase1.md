@@ -6,9 +6,9 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 **z12**
 
-*Jan Budziński*
-*Marcin Godniak*
-*Kacper Klassa*
+*Jan Budziński*  
+*Marcin Godniak*  
+*Kacper Klassa*  
 
 **https://github.com/kklassa/tbd-workshop-1-24z-z12**
 
@@ -161,7 +161,7 @@ usage:
 
     Created an additional variable `machine_type` for the the `google_notebooks_instance` resource to support arbitrary machine types for the JupyterLab instance.
 
-    ['modules/vertex-ai-workbench/variables.tf']
+    ['modules/vertex-ai-workbench/variables.tf'](modules/vertex-ai-workbench/variables.tf)
 
     ```
     variable "machine_type" {
@@ -171,7 +171,7 @@ usage:
     }
     ```
 
-    ['modules/vertex-ai-workbench/main.tf']
+    ['modules/vertex-ai-workbench/main.tf'](modules/vertex-ai-workbench/main.tf)
 
     ```
     resource "google_notebooks_instance" "tbd_notebook" {
@@ -237,4 +237,19 @@ usage:
 
     4. (Optional) Get access to Apache Spark WebUI
 
-    ***place the link to the modified file and inserted terraform code***
+    Enabled the HTTP port access on the dataproc cluster:
+
+    ['modules/dataproc/main.tf'](modules/dataproc/main.tf)
+
+    ```
+    cluster_config {
+      endpoint_config {
+        enable_http_port_access = true
+      }
+      ...
+    }
+    ```
+
+    After applying the changes, the Spark WebUI was accessible by navigating to Dataproc -> Clusters -> tbd-cluster -> Web Interfaces -> Spark History Server.
+
+    ![image](doc/figures/spark-history-webui.png)

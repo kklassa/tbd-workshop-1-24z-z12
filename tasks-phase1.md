@@ -95,16 +95,22 @@ usage:
 
 11.  Create a BigQuery dataset and an external table using SQL
 
-    ``` sql
-    CREATE SCHEMA IF NOT EXISTS task1;
-
-    CREATE EXTERNAL TABLE task1.2015_flights
+  ```sql
+  REATE SCHEMA IF NOT EXISTS demo OPTIONS(location = 'europe-west1');
+  
+  CREATE OR REPLACE EXTERNAL TABLE demo.shakespeare
     OPTIONS (
-      format = 'parquet',
-      uris = ['gs://bucket-tbd-z12/2015_flights.parquet']
-    );
-    ```
-    ![image](https://github.com/user-attachments/assets/5ed43a3c-eb4e-4317-8a95-3b33453e597e)
+    
+    format = 'ORC',
+    uris = ['gs://tbd-2024z-310742-data/data/shakespeare/*.orc']);
+  
+  
+  SELECT * FROM demo.shakespeare ORDER BY sum_word_count DESC LIMIT 5;
+  
+  ```
+  Querrying the resulting table:
+  
+  ![img.png](doc/figures/big-querry-results.png)
 
     ORC (Optimized Row Columnar) does not require a table schema because the schema information is embedded within the file, allowing tools to read structure of the data without needing a predefined schema.
 

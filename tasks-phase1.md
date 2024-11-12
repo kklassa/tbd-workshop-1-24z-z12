@@ -118,8 +118,12 @@ usage:
 
     ![image](https://github.com/user-attachments/assets/aa288a12-2dcb-49fb-bfd8-55c7740d40b6)
 
+    Po z klonowaniu repo z notebookami i uruchomieniu hello-world-pyspark:
+    
+    ![img.png](doc/figures/hello-world-pyspark.png)
 
-13. Find and correct the error in spark-job.py
+
+14. Find and correct the error in spark-job.py
 
     I had problems connecting spark to Google Cloud services. Most of this problems were solved by defining a SparkSession.
     I needed to download and include jars for connecting to hadoop adn BigQuery: .config('spark.jars', 'spark_jars/spark-bigquery-with-dependencies_2.12-0.29.0.jar,spark_jars/gcs-connector-hadoop2-latest.jar')
@@ -133,7 +137,7 @@ usage:
     ![image](https://github.com/user-attachments/assets/eb7b1302-0b5a-4b73-a2a0-14062e00fa16)
 
 
-14. Additional tasks using Terraform:
+15. Additional tasks using Terraform:
 
     1. Add support for arbitrary machine types and worker nodes for a Dataproc cluster and JupyterLab instance
 

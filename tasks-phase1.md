@@ -125,13 +125,12 @@ usage:
 
 14. Find and correct the error in spark-job.py
 
-    I had problems connecting spark to Google Cloud services. Most of this problems were solved by defining a SparkSession.
-    I needed to download and include jars for connecting to hadoop adn BigQuery: .config('spark.jars', 'spark_jars/spark-bigquery-with-dependencies_2.12-0.29.0.jar,spark_jars/gcs-connector-hadoop2-latest.jar')
-    Provide project information: .config("parentProject", "tbd-2024z-310742").config("spark.bigquery.project", "tbd-2024z-310742")
-    COnfigure filesystem information:  .config("fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem").config("fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS")
+    To fix the job we changed the DATA_BACKET location to the one inside our project.
+    DATA_BUCKET = "gs://tbd-2024z-310742-data/data/shakespeare/"
 
-    Beside that I need to define GOOGLE_APPLICATION_CREDENTIALS to point to my gcloud credentials export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json.
-    Also I set my role as Storage Object Admin - to make sure I can write to Goofle Cloud Storage.
+    This job produces *.orc files containing the results of the count.
+    ![Screenshot from 2024-11-18 00-48-33](https://github.com/user-attachments/assets/03c0c212-7c63-4eb2-b69b-5a844bb08313)
+
 
     After loading the results into BigQuery as external table, the results are:
     ![image](https://github.com/user-attachments/assets/eb7b1302-0b5a-4b73-a2a0-14062e00fa16)

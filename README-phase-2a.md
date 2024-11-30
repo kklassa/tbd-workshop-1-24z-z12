@@ -26,9 +26,9 @@ Worth to read:
 
 4. Provision your infrastructure.
 
-    a) setup Vertex AI Workbench `pyspark` kernel as described in point [8](https://github.com/bdg-tbd/tbd-workshop-1/tree/v1.0.32#project-setup) 
+    a) setup Vertex AI Workbench `pyspark` kernel as described in point [8](https://github.com/bdg-tbd/tbd-workshop-1/tree/v1.0.32#project-setup)
 
-    b) upload [tpc-di-setup.ipynb](https://github.com/bdg-tbd/tbd-workshop-1/blob/v1.0.36/notebooks/tpc-di-setup.ipynb) to 
+    b) upload [tpc-di-setup.ipynb](https://github.com/bdg-tbd/tbd-workshop-1/blob/v1.0.36/notebooks/tpc-di-setup.ipynb) to
 the running instance of your Vertex AI Workbench
 
 5. In `tpc-di-setup.ipynb` modify cell under section ***Clone tbd-tpc-di repo***:
@@ -36,7 +36,7 @@ the running instance of your Vertex AI Workbench
    a)first, fork https://github.com/mwiewior/tbd-tpc-di.git to your github organization.
 
    b)create new branch (e.g. 'notebook') in your fork of tbd-tpc-di and modify profiles.yaml by commenting following lines:
-   ```  
+   ```
         #"spark.driver.port": "30000"
         #"spark.blockManager.port": "30001"
         #"spark.driver.host": "10.11.0.5"  #FIXME: Result of the command (kubectl get nodes -o json |  jq -r '.items[0].status.addresses[0].address')
@@ -46,7 +46,7 @@ the running instance of your Vertex AI Workbench
 
    c)update git clone command to point to ***your fork***.
 
- 
+
 
 
 6. Access Vertex AI Workbench and run cell by cell notebook `tpc-di-setup.ipynb`.
@@ -62,7 +62,7 @@ the running instance of your Vertex AI Workbench
          git pull
          ```
       replace repo with your fork. Next checkout to 'notebook' branch.
-   
+
     c) after running first cells your fork of `tbd-tpc-di` repository will be cloned into Vertex AI  enviroment (see git folder).
 
     d) take a look on `git/tbd-tpc-di/profiles.yaml`. This file includes Spark parameters that can be changed if you need to increase the number of executors and
@@ -77,13 +77,21 @@ the running instance of your Vertex AI Workbench
 
 7. Explore files created by generator and describe them, including format, content, total size.
 
-   ***Files desccription***
+   The generator created three batches of files.
+   The files are of four formats: CSV, TXT, XML, and raw text.
+
+   The files contain financial transactional data divided by year and further by quarter.
+
+   The total size of files is 9.6GB.
+   ![files size](doc/figures/files_size_tpc-di.png)
+
+   ***Files description***
 
 8. Analyze tpcdi.py. What happened in the loading stage?
 
    ***Your answer***
 
-9. Using SparkSQL answer: how many table were created in each layer?
+9.  Using SparkSQL answer: how many table were created in each layer?
 
    ***SparkSQL command and output***
 
@@ -96,7 +104,7 @@ the running instance of your Vertex AI Workbench
    dbt_git_repo            = "https://github.com/mwiewior/tbd-tpc-di.git"
    dbt_git_repo_branch     = "main"
    ```
-   so dbt_git_repo points to your fork of tbd-tpc-di. 
+   so dbt_git_repo points to your fork of tbd-tpc-di.
 
 12. Redeploy infrastructure and check if the DAG finished with no errors:
 

@@ -18,9 +18,13 @@ Worth to read:
 
 2. Authors:
 
-   ***Enter your group nr***
+**z12**
 
-   ***Link to forked repo***
+*Jan Budziński*  
+*Marcin Godniak*  
+*Kacper Klassa*  
+
+**https://github.com/kklassa/tbd-workshop-1-24z-z12**
 
 3. Sync your repo with https://github.com/bdg-tbd/tbd-workshop-1.
 
@@ -84,8 +88,6 @@ the running instance of your Vertex AI Workbench
 
    The total size of files is 9.6GB.
    ![files size](doc/figures/files_size_tpc-di.png)
-
-   ***Files description***
 
 8. Analyze tpcdi.py. What happened in the loading stage?
 

@@ -84,18 +84,39 @@ the running instance of your Vertex AI Workbench
    The generator created three batches of files.
    The files are of four formats: CSV, TXT, XML, and raw text.
 
+   ![generated files](doc/figures/generated-files.png)
+
    The files contain financial transactional data divided by year and further by quarter.
+   The files are a part of the TPC-DI benchmark dataset.
+   Most notably they contain the files: `Date.txt`, `DailyMarket.txt`, `Industry.txt`, `Prospect.csv`, `CustomerMgmt.xml`, `TaxRate.txt`, `HR.csv`, `WatchHistory.txt`, `Trade.txt`, `TradeHistory.txt`, `StatusType.txt`, `TradeType.txt`, `HoldingHistory.txt`, `CashTransaction.txt` and many files with `FINWIRE` prefix.
 
    The total size of files is 9.6GB.
    ![files size](doc/figures/files_size_tpc-di.png)
 
 8. Analyze tpcdi.py. What happened in the loading stage?
 
-   ***Your answer***
+   The `tpcdi.py` file contains a script used to load data from TPC-DI data integration benchmark that was generated in the previous step into a Data Lakehouse environment in GCP GCS. 
+   The main logic happens in the `process_files` function. This function first defines some utility inner functions for saving DataFrames as tables, uploading files to the stage bucket and loading a DataFrame from CSV files stored in the stage. Then it processes each of the files listed in previous section. For each file, a corresponsing table is created except for the `FINWARE` files which are used to create a temporary table from which `CMP`, `SEC` and `FIN` tables are created.
+   Here is the final list of created table names:
+   - DATE
+   - DAILY_MARKET
+   - INDUSTRY
+   - PROSPECT
+   - CUSTOMER_MGMT
+   - TAX_RATE
+   - HR
+   - WATCH_HISTORY
+   - TRADE
+   - TRADE_HISTORY
+   - STATUS_TYPE
+   - TRADE_TYPE
+   - HOLDING_HISTORY
+   - CASH_TRANSACTION
+   - CMP
+   - SEC
+   - FIN
 
 9.  Using SparkSQL answer: how many table were created in each layer?
-
-   ***SparkSQL command and output***
 
 10. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing. ***Add new tests to your repository.***
 

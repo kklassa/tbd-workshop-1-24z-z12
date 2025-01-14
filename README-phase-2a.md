@@ -195,4 +195,8 @@ the running instance of your Vertex AI Workbench
 
 12. Redeploy infrastructure and check if the DAG finished with no errors:
 
-***The screenshot of Apache Aiflow UI***
+   We had to update line 54 in 'dbt-dag.py' to have the correct repository name, as out fork is called 'tbd-tpc-di-24z-z12' and not 'tbd-tpc-di'.
+
+   ![Composer UI](doc/figures/composer-dbt-task-success.png)  
+
+   ![Airflow UI](doc/figures/airflowui-dbt-task-success.png)

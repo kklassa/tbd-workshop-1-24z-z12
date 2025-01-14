@@ -118,11 +118,73 @@ the running instance of your Vertex AI Workbench
 
 9.  Using SparkSQL answer: how many table were created in each layer?
 
+   Executing the `show databases` command in the SparkSQL shell shows that the following databases were created by ELT process:
 
+   ```
+   +-----------+
+   |  namespace|
+   +-----------+
+   |     bronze|
+   |    default|
+   |demo_bronze|
+   |  demo_gold|
+   |demo_silver|
+   |      digen|
+   |       gold|
+   |     silver|
+   +-----------+
+   ```
 
-10. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing. ***Add new tests to your repository.***
+   By executing the `show tables in <TABLE_NAME>` command for each of the databases, we can see the number of tables created in each database:
 
-   ***Code and description of your tests***
+   - `default` - 0 tables
+   - `bronze` - 0 tables
+   - `silver` - 0 tables
+   - `gold` - 0 tables
+   - `digen` - 17 tables
+   - `demo_bronze` - 17 tables
+   - `demo_silver` - 12 tables
+   - `demo_gold` - 14 tables
+
+   Given the table names of the database we can see that the `digen` database contains the raw tables created by the `tpcdi.py` script, while the `demo_bronze`, `demo_silver` and `demo_gold` databases represent the different layers of the lakehouse architecture - bronze containing the data with minimal transformations, silver containing the transformed data and gold containing data in form of a star schema ready for analysis.
+
+10. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing. 
+
+   The tests were added on the `notebook` branch [here](https://github.com/kklassa/tbd-tpc-di-24z-z12/tree/notebook/tests). The tests are as follows:
+
+   1. Check that `sk_trade_id` is not null in the `fact_trade` fact table:
+
+   ```sql
+   select *
+   from {{ ref('fact_trade') }}
+   where sk_trade_id is null
+   ```
+
+   2. Check that both `trade_price` and `bid_price` are more than 0 in the `fact_trade` fact table:
+
+   ```sql
+   select *
+   from {{ ref('fact_trade') }}
+   where trade_price < 0 or bid_price < 0
+   ```
+
+   3. Check that `trade_price` is greater than `bid_price` in the `fact_trade` fact table. This is an example of a hypothetical business rule that could be implemented as a test:
+
+   ```sql
+   select *
+   from {{ ref('fact_trade') }}
+   where trade_price < bid_price
+   ```
+
+   4. Check that all `sk_broker_id` in the `fact_trade` fact table are present in the `dim_broker` dimension table. This checks the integrity of the foreign key relationship between the two tables:
+
+   ```sql
+   select t.sk_broker_id
+   from {{ ref('fact_trade') }} t
+   left join {{ ref('dim_broker') }} b
+   on t.sk_broker_id = b.sk_broker_id
+   where b.sk_broker_id is null
+   ```
 
 11. In main.tf update
    ```
